@@ -1,16 +1,15 @@
 import { SafeAreaView, Text, View } from "react-native";
 import { color, defaultStyles, fontFamily, size } from "../constants/Theme";
-import { StatusBar } from "expo-status-bar";
 import { styles } from "../styles/tabHome";
 import { FontAwesome, Feather, Ionicons } from "@expo/vector-icons";
 import HorizontalCategory from "./HorizontalCategory";
-import { LinearGradient } from "expo-linear-gradient";
 
 type dataType = {
   categorySelect: (selected: string) => void;
+  homeCategory: string[];
 };
 
-const HomeHeader = ({ categorySelect }: dataType) => {
+const HomeHeader = ({ categorySelect, homeCategory }: dataType) => {
   const selectedCategory = (name: string) => {
     categorySelect(name);
   };
@@ -45,7 +44,10 @@ const HomeHeader = ({ categorySelect }: dataType) => {
           </View>
         </View>
 
-        <HorizontalCategory selectedCategory={selectedCategory} />
+        <HorizontalCategory
+          selectedCategory={selectedCategory}
+          homeCategory={homeCategory}
+        />
       </View>
     </SafeAreaView>
   );
