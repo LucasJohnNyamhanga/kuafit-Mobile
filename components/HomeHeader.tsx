@@ -1,12 +1,13 @@
-import { SafeAreaView, Text, View } from "react-native";
+import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { color, defaultStyles, fontFamily, size } from "../constants/Theme";
 import { styles } from "../styles/tabHome";
 import { FontAwesome, Feather, Ionicons } from "@expo/vector-icons";
 import HorizontalCategory from "./HorizontalCategory";
+import { bodyListType, bodyListReadOnlyType } from "../app/Types/types";
 
 type dataType = {
   categorySelect: (selected: string) => void;
-  homeCategory: string[];
+  homeCategory: bodyListReadOnlyType;
 };
 
 const HomeHeader = ({ categorySelect, homeCategory }: dataType) => {
@@ -29,7 +30,7 @@ const HomeHeader = ({ categorySelect, homeCategory }: dataType) => {
                 <Text style={styles.text}>Benson Godfrey</Text>
               </View>
             </View>
-            <View style={styles.welcomeHeaderContainer}>
+            {/* <View style={styles.welcomeHeaderContainer}>
               <Feather
                 name="search"
                 size={size.xxLarge}
@@ -40,10 +41,21 @@ const HomeHeader = ({ categorySelect, homeCategory }: dataType) => {
                 size={size.xxLarge}
                 color={color.secondary}
               />
-            </View>
+            </View> */}
           </View>
         </View>
-
+        <TouchableOpacity>
+          <View style={styles.search}>
+            <Text style={styles.searchText}>Search Excercise, Muscle...</Text>
+            <Feather
+              style={styles.icon}
+              name="search"
+              size={size.xLarge}
+              color={color.gold}
+            />
+          </View>
+        </TouchableOpacity>
+        <Text style={styles.catText}>Categories</Text>
         <HorizontalCategory
           selectedCategory={selectedCategory}
           homeCategory={homeCategory}

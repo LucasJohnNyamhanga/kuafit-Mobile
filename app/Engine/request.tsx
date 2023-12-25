@@ -9,18 +9,18 @@ function showToast(sms: string) {
 export const getBodyPart = async () => {
   const options = {
     method: "GET",
-    url: "http://127.0.0.1:8000/api/bodyparts",
+    url: "https://database.co.tz/api/bodyparts",
     // headers: {
     //   "X-RapidAPI-Key": "1936923b3emsh2cc97780d559a45p1629f7jsn2bb41be1f074",
     //   "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
     // },
   };
-  let data: bodyListType = [];
+  let data: bodyListType | any = [];
 
   try {
     const response = await axios.request(options);
-    if (response.status == 200) {
-      data = response.data;
+    if (response.data.status == 200) {
+      data = response.data.data.data;
     }
   } catch (error) {
     console.log("error : " + error);
@@ -30,27 +30,28 @@ export const getBodyPart = async () => {
   return data;
 };
 
-export const getBodyPartExcercise = async (bodyPart: string, limit: number) => {
+export const getBodyPartExcercise = async (bodyPart: string) => {
   const options = {
     method: "GET",
-    url: `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`,
-    params: { limit: limit.toString() },
-    headers: {
-      "X-RapidAPI-Key": "1936923b3emsh2cc97780d559a45p1629f7jsn2bb41be1f074",
-      "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
-    },
+    url: `https://database.co.tz/api/exercises`,
+    params: { part: bodyPart },
+    // headers: {
+    //   "X-RapidAPI-Key": "1936923b3emsh2cc97780d559a45p1629f7jsn2bb41be1f074",
+    //   "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
+    // },
   };
 
-  let data: bodyExcercesType = [];
+  let data: bodyExcercesType | any = [];
+  //
 
   try {
     const response = await axios.request(options);
     if (response.status == 200) {
-      data = response.data;
+      data = response.data.data.data;
     }
   } catch (error) {
     console.log("error : " + error);
-    //showToast(`${error}`);
+    showToast(`${error}`);
   }
 
   return data;

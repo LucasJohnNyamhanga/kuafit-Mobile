@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { color, fontFamily, size } from "../../constants/Theme";
 import { LinearGradient } from "expo-linear-gradient";
@@ -9,83 +9,44 @@ import { useEffect, useState } from "react";
 import { bodyExcercesType, bodyListType, imageType } from "../Types/types";
 import { getBodyPart, getBodyPartExcercise } from "../Engine/request";
 import { ImageProps } from "react-native";
-import { ImageDisplay } from "../../components/ImageDisplay";
+import { Workout } from "../../components/Workout";
 
-const back = require("../../assets/images/back.jpg");
-const cardio = require("../../assets/images/cardio.jpg");
-const chest = require("../../assets/images/chest.jpg");
-const lowerlegs = require("../../assets/images/lowerlegs.jpg");
-const neck = require("../../assets/images/neck.jpg");
-const shoulders = require("../../assets/images/shoulders.jpg");
-const upperarms = require("../../assets/images/upperarms.jpg");
-const upperlegs = require("../../assets/images/upperlegs.jpg");
-const waist = require("../../assets/images/waist.jpg");
-const def = require("../../assets/images/default.jpg");
+const mgongo = require("../../assets/images/BACK.png");
+const kifua = require("../../assets/images/kifua.png");
+const mikonoJuu = require("../../assets/images/mikonojuu.png");
+const mikonoChini = require("../../assets/images/mikonochini.png");
+const mikonoNyuma = require("../../assets/images/TRICEPS.png");
+const mabega = require("../../assets/images/mabega.png");
+const tumbo = require("../../assets/images/tumbo.png");
+const miguuJuu = require("../../assets/images/mapajaMbele.png");
+const miguuChini = require("../../assets/images/miguuChini.png");
+const kiuno = require("../../assets/images/makalio.png");
+const shingo = require("../../assets/images/shingo.png");
 
 const index = () => {
   const [bodyList, setBodyList] = useState<bodyListType>([]);
   const [category, setCategory] = useState("");
-  const [image, setImage] = useState<ImageProps>(back);
+  const [image, setImage] = useState<ImageProps>(mgongo);
   const [bodyExcerciseList, setBodyExcerciseList] = useState<bodyExcercesType>(
     []
   );
 
-  const imageChanger = (element: string) => {
-    switch (element) {
-      case "back":
-        setImage(back);
-        break;
-      case "cardio":
-        setImage(cardio);
-        break;
-      case "chest":
-        setImage(chest);
-        break;
-      case "lower arms":
-        setImage(def);
-        break;
-      case "lower legs":
-        setImage(lowerlegs);
-        break;
-      case "neck":
-        setImage(neck);
-        break;
-      case "shoulders":
-        setImage(shoulders);
-        break;
-      case "upper arms":
-        setImage(upperarms);
-        break;
-      case "upper legs":
-        setImage(upperlegs);
-        break;
-      case "waist":
-        setImage(waist);
-        break;
-
-      default:
-        setImage(def);
-        break;
-    }
-  };
-
-  const listPart = [
-    "Back",
-    "Cardio",
-    "Chest",
-    "Lower arms",
-    "Lower legs",
-    "Neck",
-    "Shoulders",
-    "Upper arms",
-    "Upper legs",
-    "Waist",
+  const catList = [
+    { name: "Shingo", img: shingo },
+    { name: "Kifua", img: kifua },
+    { name: "Mikono Juu", img: mikonoJuu },
+    { name: "Mikono Chini", img: mikonoChini },
+    { name: "Mikono Nyuma", img: mikonoNyuma },
+    { name: "Miguu Juu", img: miguuJuu },
+    { name: "Miguu Chini", img: miguuChini },
+    { name: "Mabega", img: mabega },
+    { name: "Kiuno", img: kiuno },
+    { name: "Tumbo", img: tumbo },
   ];
 
   const selectedCategory = (selected: string) => {
-    getDataBodyExcercise(selected, 10);
+    getDataBodyExcercise(selected);
     setCategory(selected);
-    imageChanger(selected);
   };
 
   const getDataBodyPart = async () => {
@@ -93,78 +54,45 @@ const index = () => {
     setBodyList(data);
   };
 
-  const getDataBodyExcercise = async (bodyPart: string, limit: number) => {
-    const data = await getBodyPartExcercise(bodyPart, limit);
+  const getDataBodyExcercise = async (bodyPart: string) => {
+    const data = await getBodyPartExcercise(bodyPart);
     setBodyExcerciseList(data);
   };
 
   useEffect(() => {
     getDataBodyPart();
-    imageChanger("back");
-    //getDataBodyExcercise("back", 10);
+    getDataBodyExcercise("back");
+    setCategory("Shingo");
   }, []);
 
   return (
-    <View>
-      <StatusBar style="light" />
+    <ScrollView style={{ flex: 1, backgroundColor: color.start }}>
       <LinearGradient
-        colors={[color.start, color.end]}
+        colors={[color.middle, color.end]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
+        style={{ flex: 1 }}
       >
-        <View style={{ backgroundColor: "transparent", height: "100%" }}>
-          <Stack.Screen
-            options={{
-              header: () => (
-                <HomeHeader
-                  categorySelect={selectedCategory}
-                  homeCategory={listPart}
-                />
-              ),
-            }}
-          />
-          <View
-            style={{
-              backgroundColor: color.secondary,
-              margin: 10,
-              height: 150,
-              position: "relative",
-              borderRadius: 10,
-            }}
-          >
-            <View style={{ flex: 1 }}>
-              <ImageDisplay name={image} />
-            </View>
-            <Text
-              style={{
-                color: color.gold,
-                position: "absolute",
-                top: 100,
-                fontFamily: fontFamily.MontBold,
-                fontSize: size.xxLarge,
-                marginHorizontal: 15,
-              }}
-            >
-              {category}
-            </Text>
-          </View>
+        <View>
+          <StatusBar style="light" translucent backgroundColor="transparent" />
 
-          <View style={{ marginHorizontal: 10 }}>
-            {bodyExcerciseList.map((excercise, index) => (
-              <Text
-                key={index}
-                style={{
-                  color: color.secondary,
-                  fontFamily: fontFamily.FiraBold,
-                }}
-              >
-                {excercise.name}
-              </Text>
-            ))}
+          <View style={{ backgroundColor: "transparent" }}>
+            <Stack.Screen
+              options={{
+                headerShown: false,
+              }}
+            />
+
+            <HomeHeader
+              categorySelect={selectedCategory}
+              homeCategory={catList}
+            />
+            {/* <CategoryImage category={category} name={image} /> */}
+            <Workout bodyExcerciseList={bodyExcerciseList} />
           </View>
         </View>
       </LinearGradient>
-    </View>
+    </ScrollView>
   );
 };
 

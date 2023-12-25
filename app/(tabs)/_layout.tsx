@@ -1,6 +1,10 @@
 import { Tabs } from "expo-router";
 import { color, defaultStyles, fontFamily, size } from "../../constants/Theme";
 import { Ionicons, MaterialIcons, FontAwesome } from "@expo/vector-icons";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 type iconType = {
   color: string;
@@ -16,11 +20,13 @@ const Layout = () => {
         tabBarLabelStyle: {
           fontFamily: fontFamily.MontBold,
           fontSize: size.small,
-          marginBottom: size.xSmall,
+          marginBottom: wp(3),
         },
         tabBarStyle: {
-          height: 75,
-          borderWidth: 1,
+          height: wp(20),
+          borderTopWidth: wp(0),
+          borderColor: color.gold,
+          borderStyle: "solid",
           backgroundColor: color.backgroundMirror,
         },
       }}

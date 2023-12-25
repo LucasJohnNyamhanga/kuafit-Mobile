@@ -2,10 +2,17 @@ import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import React, { useRef, useState } from "react";
 import { styles } from "../styles/horizontalCategory";
 import * as Haptics from "expo-haptics";
+import { bodyListType, bodyListReadOnlyType } from "../app/Types/types";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+import { ImageDisplay } from "./ImageDisplay";
+import { Image } from "expo-image";
 
 type dataType = {
   selectedCategory: (selected: string) => void;
-  homeCategory: string[];
+  homeCategory: bodyListReadOnlyType;
 };
 
 const HorizontalCategory = ({ selectedCategory, homeCategory }: dataType) => {
@@ -17,7 +24,7 @@ const HorizontalCategory = ({ selectedCategory, homeCategory }: dataType) => {
     const selectedElement = iteamsRef.current[index];
 
     setActiveIndex(index);
-    selectedCategory(homeCategory[index]);
+    selectedCategory(homeCategory[index].name);
     selectedElement?.measure((xposition) => {
       console.log(xposition);
       scrollref.current?.scrollTo({ x: xposition, y: 0, animated: true });
@@ -31,6 +38,7 @@ const HorizontalCategory = ({ selectedCategory, homeCategory }: dataType) => {
       horizontal
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={styles.scroll}
+      style={{ marginBottom: wp(2) }}
     >
       {homeCategory.map((cat, index) => (
         //! hii ni loop tuna loop through data set yetu
@@ -42,8 +50,15 @@ const HorizontalCategory = ({ selectedCategory, homeCategory }: dataType) => {
           }
           ref={(el) => iteamsRef.current[index] == el}
         >
+          <Image
+            source={cat.img}
+            contentFit="cover"
+            transition={1000}
+            contentPosition="right center"
+            style={styles.image}
+          />
           <Text style={activeIndex == index ? styles.textActive : styles.text}>
-            {cat}
+            {cat.name}
           </Text>
         </TouchableOpacity>
       ))}

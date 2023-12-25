@@ -1,4 +1,7 @@
 import { StyleSheet } from "react-native";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
+
 export const  color = {
   primary: '#152022',
   secondary: '#fff',
@@ -17,13 +20,13 @@ export const  color = {
 };
 
 export const size = {
-  xSmall: 10,
-  small: 12,
-  medium: 16,
-    large: 20,
-    xLarge: 24,
-  xxLarge: 32,
-  xxxLarge:42
+  xSmall: wp(1),
+  small: wp(3),
+  medium: wp(4),
+    large: wp(5),
+    xLarge: wp(6),
+  xxLarge: wp(7),
+  xxxLarge:wp(8)
 };
 
 export const fontFamily = {
@@ -38,21 +41,24 @@ export const fontFamily = {
 export const defaultStyles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop:20
+    marginTop:wp(1)
   },
   inputField: {
-    height: 44,
-    borderWidth: 1,
+    flex:1,
+    height: wp(12),
+    borderWidth: wp(1),
     borderColor: color.shadeOfGray,
-    borderRadius: 8,
-    padding: 10,
+    borderRadius: wp(2),
     backgroundColor: color.secondary,
+    marginHorizontal: wp(3),
+    fontSize: size.large,
+    marginBottom:wp(5)
     
   },
   btn: {
     backgroundColor: color.primary,
-    height: 50,
-    borderRadius: 8,
+    height: wp(50),
+    borderRadius: wp(8),
     justifyContent: "center",
     alignItems:'center',
   },
@@ -64,23 +70,22 @@ export const defaultStyles = StyleSheet.create({
   },
   btnIcon: {
     position: 'absolute',
-    left:16
+    left:wp(16)
   },
 
   backShadow: {
-    elevation: 2,
+    elevation: wp(2),
     shadowColor: color.black,
-    shadowOpacity: 0.12,
-    shadowRadius: 8,
+    shadowOpacity: wp(0.12),
+    shadowRadius: wp(8),
     backgroundColor:color.secondary,
     shadowOffset: {
-      width: 1,
-      height:1
-    }
+      width: wp(1),
+      height:wp(1)    }
   },
 
   safeArea: {
-    paddingTop: 25,
+    paddingTop: wp(8),
     backgroundColor:color.primary
   }
 
