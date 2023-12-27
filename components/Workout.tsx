@@ -1,7 +1,7 @@
 import { styles } from "../styles/workout";
 import { View, Text } from "react-native";
 import { size, color, fontFamily } from "../constants/Theme";
-import { ExcercesType, bodyExcercesType } from "../app/Types/types";
+import { bodyExcercesType } from "../app/Types/types";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -12,14 +12,14 @@ import CardWorkout from "./CardWorkout";
 const workoutImage = require("../assets/images/image2.gif");
 
 type dataType = {
-  bodyExcerciseList: bodyExcercesType;
+  bodyExcerciseList: bodyExcercesType[];
 };
 
 export const Workout = ({ bodyExcerciseList }: dataType) => {
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.textWorkout}>Workouts</Text>
-      {bodyExcerciseList.map((excercise: ExcercesType, index: number) => (
+      {bodyExcerciseList.map((excercise, index: number) => (
         <View style={styles.card} key={index}>
           <CardWorkout image={workoutImage} excercise={excercise} />
         </View>

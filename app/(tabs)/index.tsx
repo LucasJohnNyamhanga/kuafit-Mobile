@@ -24,12 +24,12 @@ const kiuno = require("../../assets/images/makalio.png");
 const shingo = require("../../assets/images/shingo.png");
 
 const index = () => {
-  const [bodyList, setBodyList] = useState<bodyListType>([]);
+  const [bodyList, setBodyList] = useState<bodyListType[]>([]);
   const [category, setCategory] = useState("");
   const [image, setImage] = useState<ImageProps>(mgongo);
-  const [bodyExcerciseList, setBodyExcerciseList] = useState<bodyExcercesType>(
-    []
-  );
+  const [bodyExcerciseList, setBodyExcerciseList] = useState<
+    bodyExcercesType[]
+  >([]);
 
   const catList = [
     { name: "Shingo", img: shingo },

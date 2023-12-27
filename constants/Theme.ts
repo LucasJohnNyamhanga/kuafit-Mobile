@@ -9,6 +9,8 @@ export const  color = {
   shadeOfGray: '#ABABAB',
   black: 'black',
   grey: 'grey',
+  green: 'green',
+  red:'red',
   start: '#1C2829',
   middle: '#1E292B',
   middleCenter: '#1B2525',
@@ -52,7 +54,7 @@ export const defaultStyles = StyleSheet.create({
     backgroundColor: color.secondary,
     marginHorizontal: wp(3),
     fontSize: size.large,
-    marginBottom:wp(5)
+    
     
   },
   btn: {
