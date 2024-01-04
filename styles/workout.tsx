@@ -85,4 +85,17 @@ export const styles = StyleSheet.create({
   labelLevelandTarget: {
     color: color.gold,
   },
+  loading: { marginVertical: hp(8) },
+  noExcircise: {
+    fontFamily: fontFamily.MontMedium,
+    fontSize: size.medium,
+    textAlign: "center",
+    color: color.grey,
+  },
+  noExcerciseContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignContent: "center",
+    height: hp(16),
+  },
 });

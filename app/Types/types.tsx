@@ -4,6 +4,7 @@ export type bodyListType = {
   created_at: string;
   id: number;
   name: string;
+  imgUrl: string;
   updated_at: string;
 };
 
@@ -37,7 +38,6 @@ export type bodyExcercesType = {
       }[]
     | [];
   name: string;
-  target: string;
   updated_at: string;
 };
 

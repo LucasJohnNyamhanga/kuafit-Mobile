@@ -104,15 +104,7 @@ export const styles = StyleSheet.create({
     fontSize: size.large,
     color: color.secondary,
   },
-  submitText: {
-    flex: 1,
-    paddingHorizontal: wp(4),
-    paddingVertical: hp(1),
-    fontFamily: fontFamily.MontBold,
-    fontSize: size.large,
-    color: color.secondary,
-    textAlign: "center",
-  },
+
   image: { height: hp(20), width: wp(60) },
   spaceBottom: {
     marginBottom: hp(2),
@@ -138,5 +130,20 @@ export const styles = StyleSheet.create({
     color: color.secondary,
     fontFamily: fontFamily.FiraRegural,
     fontSize: size.medium,
+  },
+
+  submitText: {
+    paddingHorizontal: wp(4),
+    paddingVertical: hp(1),
+    fontFamily: fontFamily.MontBold,
+    fontSize: size.large,
+    color: color.black,
+  },
+
+  buttonGradient: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

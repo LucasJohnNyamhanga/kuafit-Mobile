@@ -3,14 +3,15 @@ import { color, defaultStyles, fontFamily, size } from "../constants/Theme";
 import { styles } from "../styles/tabHome";
 import { FontAwesome, Feather, Ionicons } from "@expo/vector-icons";
 import HorizontalCategory from "./HorizontalCategory";
-import { bodyListType, bodyListReadOnlyType } from "../app/Types/types";
+import { bodyListType } from "../app/Types/types";
 
 type dataType = {
   categorySelect: (selected: string) => void;
-  homeCategory: bodyListReadOnlyType;
+  homeCategory: bodyListType[];
+  loading: boolean;
 };
 
-const HomeHeader = ({ categorySelect, homeCategory }: dataType) => {
+const HomeHeader = ({ categorySelect, homeCategory, loading }: dataType) => {
   const selectedCategory = (name: string) => {
     categorySelect(name);
   };
@@ -57,6 +58,7 @@ const HomeHeader = ({ categorySelect, homeCategory }: dataType) => {
         </TouchableOpacity>
         <Text style={styles.catText}>Categories</Text>
         <HorizontalCategory
+          loading={loading}
           selectedCategory={selectedCategory}
           homeCategory={homeCategory}
         />

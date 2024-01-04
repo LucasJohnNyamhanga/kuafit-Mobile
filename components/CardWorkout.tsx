@@ -2,15 +2,13 @@ import { View, Text } from "react-native";
 import React from "react";
 import { styles } from "../styles/workout";
 import { Image } from "expo-image";
-import { ExcercesType } from "../app/Types/types";
-import { ImageProps } from "react-native";
+import { bodyExcercesType } from "../app/Types/types";
 
 type dataType = {
-  image: ImageProps | Readonly<ImageProps>;
-  excercise: ExcercesType;
+  excercise: bodyExcercesType;
 };
 
-const CardWorkout = ({ image, excercise }: dataType) => {
+const CardWorkout = ({ excercise }: dataType) => {
   return (
     <View>
       <View style={styles.cardHolder}>
@@ -20,10 +18,11 @@ const CardWorkout = ({ image, excercise }: dataType) => {
         >
           <Image
             style={styles.image}
-            source={image}
+            source={excercise.gifUrl}
             contentFit="cover"
-            transition={1000}
+            transition={500}
             contentPosition="right center"
+            priority={"high"}
           />
           <View style={styles.detailsContainer}>
             <Text

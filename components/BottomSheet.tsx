@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
@@ -18,17 +18,25 @@ type dataType = {
   list: string[];
   selected: (selected: string) => void;
   activate: boolean;
+  clear: boolean;
   closedModal: () => void;
   title: string;
 };
 
-const App = ({ list, selected, activate, closedModal, title }: dataType) => {
+const App = ({
+  list,
+  selected,
+  activate,
+  closedModal,
+  title,
+  clear,
+}: dataType) => {
   // ref
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [choice, setChoice] = useState("");
 
   // variables
-  const snapPoints = useMemo(() => ["25%", "50%"], []);
+  const snapPoints = useMemo(() => ["25%", "50%", "75%"], []);
 
   useEffect(() => {
     if (activate) {
@@ -36,7 +44,11 @@ const App = ({ list, selected, activate, closedModal, title }: dataType) => {
     } else {
       handleCloseModalPress();
     }
-  }, [activate]);
+
+    if (clear) {
+      setChoice("");
+    }
+  }, [activate, clear]);
 
   // callbacks
   const handlePresentModalPress = useCallback(() => {
@@ -66,28 +78,30 @@ const App = ({ list, selected, activate, closedModal, title }: dataType) => {
           snapPoints={snapPoints}
           onChange={handleSheetChanges}
         >
-          <View style={styles.container}>
-            <Text style={styles.title}>{title}</Text>
-            {list.map((name: string, index: number) => (
-              <View key={index} style={styles.innerContainer}>
-                <BouncyCheckbox
-                  isChecked={choice === name ? true : false}
-                  size={25}
-                  fillColor={color.green}
-                  unfillColor={color.gold}
-                  text={name}
-                  iconStyle={{ borderColor: "red" }}
-                  innerIconStyle={{ borderWidth: 2 }}
-                  textStyle={styles.checkBox}
-                  onPress={(isChecked: boolean) => {
-                    setChoice(name);
-                    selected(name);
-                    handleCloseModalPress();
-                  }}
-                />
-              </View>
-            ))}
-          </View>
+          <ScrollView style={{ flex: 1, backgroundColor: "transparent" }}>
+            <View style={styles.container}>
+              <Text style={styles.title}>{title}</Text>
+              {list.map((name: string, index: number) => (
+                <View key={index} style={styles.innerContainer}>
+                  <BouncyCheckbox
+                    isChecked={choice === name ? true : false}
+                    size={25}
+                    fillColor={color.green}
+                    unfillColor={color.gold}
+                    text={name}
+                    iconStyle={{ borderColor: "red" }}
+                    innerIconStyle={{ borderWidth: 2 }}
+                    textStyle={styles.checkBox}
+                    onPress={(isChecked: boolean) => {
+                      setChoice(name);
+                      selected(name);
+                      handleCloseModalPress();
+                    }}
+                  />
+                </View>
+              ))}
+            </View>
+          </ScrollView>
         </BottomSheetModal>
       </View>
     </BottomSheetModalProvider>
