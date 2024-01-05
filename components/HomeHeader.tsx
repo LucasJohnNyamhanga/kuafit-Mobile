@@ -4,6 +4,7 @@ import { styles } from "../styles/tabHome";
 import { FontAwesome, Feather, Ionicons } from "@expo/vector-icons";
 import HorizontalCategory from "./HorizontalCategory";
 import { bodyListType } from "../app/Types/types";
+import HorizontalMealPlan from "./HorizontalMealPlan";
 
 type dataType = {
   categorySelect: (selected: string) => void;
@@ -31,18 +32,6 @@ const HomeHeader = ({ categorySelect, homeCategory, loading }: dataType) => {
                 <Text style={styles.text}>Benson Godfrey</Text>
               </View>
             </View>
-            {/* <View style={styles.welcomeHeaderContainer}>
-              <Feather
-                name="search"
-                size={size.xxLarge}
-                color={color.secondary}
-              />
-              <Ionicons
-                name="notifications-outline"
-                size={size.xxLarge}
-                color={color.secondary}
-              />
-            </View> */}
           </View>
         </View>
         <TouchableOpacity>
@@ -56,7 +45,9 @@ const HomeHeader = ({ categorySelect, homeCategory, loading }: dataType) => {
             />
           </View>
         </TouchableOpacity>
-        <Text style={styles.catText}>Categories</Text>
+        <Text style={styles.catText}>Your Packages</Text>
+        <HorizontalMealPlan />
+        <Text style={styles.catText}>Get Fit</Text>
         <HorizontalCategory
           loading={loading}
           selectedCategory={selectedCategory}

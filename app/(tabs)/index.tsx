@@ -16,17 +16,17 @@ const index = () => {
   const [bodyExcerciseList, setBodyExcerciseList] = useState<
     bodyExcercesType[]
   >([]);
-  const [refreshing, setRefreshing] = useState(false);
+  // const [refreshing, setRefreshing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadingBody, setLoadingBody] = useState(false);
 
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    getDataBodyPart();
-    // setTimeout(() => {
-    //   setRefreshing(false);
-    // }, 2000);
-  }, []);
+  // const onRefresh = useCallback(() => {
+  //   setRefreshing(true);
+  //   getDataBodyPart();
+  //   // setTimeout(() => {
+  //   //   setRefreshing(false);
+  //   // }, 2000);
+  // }, []);
 
   const selectedCategory = (selected: string) => {
     setLoading(true);
@@ -35,12 +35,12 @@ const index = () => {
 
   const getDataBodyPart = async () => {
     setLoadingBody(true);
-    const data = await getBodyPart();
+    let data: bodyListType[] = [];
+    data = await getBodyPart();
     setBodyList(data);
-    if (bodyList.length > 0) {
-      selectedCategory(bodyList[0].name);
+    if (data.length > 0) {
+      getDataBodyExcercise(data[0].id);
     }
-    setLoading(false);
     setLoadingBody(false);
   };
 
@@ -58,7 +58,6 @@ const index = () => {
     setLoading(true);
     const data = await getBodyPartExcercise(bodyPartId);
     setBodyExcerciseList(data);
-    setRefreshing(false);
     setLoading(false);
   };
 
@@ -69,9 +68,9 @@ const index = () => {
   return (
     <ScrollView
       style={{ flex: 1, backgroundColor: color.start }}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
+      // refreshControl={
+      //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      // }
     >
       <LinearGradient
         colors={[color.middle, color.end]}
@@ -98,6 +97,7 @@ const index = () => {
               categorySelect={selectedCategory}
               homeCategory={bodyList}
             />
+
             <Workout
               loading={loading}
               bodyExcerciseList={bodyExcerciseList.reverse()}

@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   back: {
     flexDirection: "row",
     alignContent: "center",
-    marginTop: hp(0.5),
+    marginTop: wp(3),
   },
   backHome: {
     color: color.secondary,
@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
   },
   gradient: {
     flex: 1,
-    borderRadius: 5,
+    borderRadius: wp(2),
     height: hp(20),
     width: wp(60),
     borderWidth: wp(1),
@@ -77,7 +77,7 @@ export const styles = StyleSheet.create({
   touchableContainer: { height: hp(5.7) },
   touchableGradient: {
     flex: 1,
-    borderRadius: 4,
+    borderRadius: wp(2),
     width: wp(20),
     justifyContent: "center",
     alignItems: "center",

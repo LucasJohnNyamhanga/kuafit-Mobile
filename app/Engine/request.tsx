@@ -50,7 +50,7 @@ export const getBodyPartExcercise = async (bodyPartId: number) => {
       data = JSON.parse(JSON.stringify(response.data.data.data));
     }
   } catch (error) {
-    console.log("error : " + error);
+    console.log(`error mazoezi id ${bodyPartId} : ` + error);
   }
 
   return data;
